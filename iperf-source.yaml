@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: iperf-source
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: iperf-source
+    spec:
+      containers:
+      - name: iperf
+        image: mlabbe/iperf:2.0.9-r0
+        args:
+        - -c # client mode
+        - 226.94.13.28
+        - -u # udp mode
+        - -T
+        - "32"
+        - -t
+        - "3600"
+        - -i
+        - "1"
+        - -b
+        - "100M"

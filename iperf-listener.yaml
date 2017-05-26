@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: iperf-listener
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: iperf-listener
+    spec:
+      containers:
+      - name: iperf
+        image: mlabbe/iperf:2.0.9-r0
+        args:
+        - -s # server mode
+        - -u # udp mode
+        - -B
+        - 226.94.13.28
+        - -i
+        - "1"
